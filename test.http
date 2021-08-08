@@ -1,0 +1,114 @@
+@url=http://localhost:8080
+@appName=amber2
+
+#####
+GET {{url}}/api/test
+
+########
+GET {{url}}/api/version
+
+
+#####
+GET {{url}}/api/redirect
+
+#######
+POST {{url}}/api/account/login
+Content-Type: application/json
+
+{
+    "account":"admin",
+    "password":"1qaz#EDC5tgb"
+}
+
+############
+POST {{url}}/api/account/logout
+
+########
+GET {{url}}/api/logs/{{appName}}/10
+
+######### Apps ########
+GET {{url}}/api/apps
+
+#########
+GET {{url}}/api/app/{{appName}}
+
+########
+POST {{url}}/api/app/{{appName}}
+
+######## Git #########
+GET {{url}}/api/git/{{appName}}
+
+######
+POST {{url}}/api/git/{{appName}}
+
+######## Proxy #########
+GET {{url}}/api/proxy/{{appName}}
+
+########
+PATCH {{url}}/api/proxy/{{appName}}/enable
+
+########
+PATCH {{url}}/api/proxy/{{appName}}/disable
+
+#####
+PATCH {{url}}/api/proxy/{{appName}}
+Content-Type: application/json
+
+{"scheme": "http", "hostPort":"80","containerPort":"1234"}
+
+#####
+DELETE {{url}}/api/proxy/{{appName}}
+Content-Type: application/json
+
+{"scheme": "http", "hostPort":"80","containerPort":"1234"}
+
+####### Domain ########
+GET {{url}}/api/domain/{{appName}}
+
+################################
+PATCH {{url}}/api/domain/{{appName}}/enable
+
+################################
+PATCH {{url}}/api/domain/{{appName}}/disable
+
+################################
+PATCH {{url}}/api/domain/{{appName}}
+Content-Type: application/json
+
+["temp.credot.ml","test.credot.ml"]
+
+################################
+DELETE  {{url}}/api/domain/{{appName}}
+Content-Type: application/json
+
+["temp.credot.ml","test.credot.ml"]
+###########
+GET {{url}}/api/globaldomain
+
+###########
+PUT {{url}}/api/globaldomain
+Content-Type: application/json
+
+["dokku.credot.ml"]
+
+###########
+DELETE {{url}}/api/globaldomain
+
+######## Config #######
+GET {{url}}/api/config/{{appName}}
+
+##########
+POST {{url}}/api/config/{{appName}}
+Content-Type: application/json
+
+{
+    "restart":true,
+    "config":[{"key":"key","value":"v1"},{"key":"ke2y","value":"v2"}]
+}
+
+#########
+DELETE  {{url}}/api/config/{{appName}}
+
+#########
+GET  {{url}}/api/globalconfig
+

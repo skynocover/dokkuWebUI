@@ -13,3 +13,11 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+.vscode/launch.json
+src/__debug_bin
+.DS_Store
+dokku
+dokku.pub
+go.sum
+src/.env
+Makefile
