@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 
 	"github.com/joho/godotenv"
-
 	"github.com/kataras/iris/v12"
 
 	"dokkuwebui/src/handler"
@@ -21,14 +20,14 @@ func main() {
 		log.Fatal("Error loading .env file")
 	} else {
 		if len(matches) > 0 {
-			err := godotenv.Load()
-			if err != nil {
+			// log.Println("match!")
+			if err := godotenv.Load(); err != nil {
 				log.Fatal("Error loading .env file: ", err)
 			}
 		}
 	}
 
-	if err = ssh.Client.Init(); err != nil {
+	if err := ssh.Client.Init(); err != nil {
 		log.Fatal("Error: ", err)
 	}
 
