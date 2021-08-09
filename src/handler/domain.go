@@ -1,13 +1,14 @@
 package handler
 
 import (
-	"dokkuwebui/src/resp"
-	"dokkuwebui/src/ssh"
-	"dokkuwebui/src/utils"
 	"fmt"
 	"strings"
 
 	"github.com/kataras/iris/v12"
+
+	"dokkuwebui/src/resp"
+	"dokkuwebui/src/ssh"
+	"dokkuwebui/src/utils"
 )
 
 func DomainReport(ctx iris.Context) {

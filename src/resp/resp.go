@@ -88,6 +88,11 @@ var SessionExpired = Error{
 	ErrorMessage: "Session expired",
 }
 
+var PrivateKeyNotFound = Error{
+	ErrorCode:    3,
+	ErrorMessage: "Private key not found",
+}
+
 var SystemError = Error{
 	ErrorCode:    9999,
 	ErrorMessage: "SystemError",
@@ -117,4 +122,10 @@ var ErrorAppNotExist = Error{
 var ErrorAppAlreadyExist = Error{
 	ErrorCode:    1004,
 	ErrorMessage: "App already exists",
+}
+
+// ErrorSSHKeyAlreadyExist ...
+var ErrorSSHKeyAlreadyExist = Error{
+	ErrorCode:    1005,
+	ErrorMessage: "SSH key already exists",
 }

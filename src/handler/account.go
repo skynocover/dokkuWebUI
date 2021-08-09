@@ -2,13 +2,12 @@ package handler
 
 import (
 	"os"
-
-	"github.com/kataras/iris/v12"
-
-	"dokkuwebui/src/resp"
 	"time"
 
+	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/sessions"
+
+	"dokkuwebui/src/resp"
 )
 
 var (
@@ -18,10 +17,6 @@ var (
 )
 
 func Redirect(ctx iris.Context) {
-	if auth, _ := sess.Start(ctx).GetBoolean("authenticated"); !auth {
-		ctx.Write(resp.SessionExpired.ToBytes())
-		return
-	}
 	ctx.Write(resp.SUCCESS.ToBytes())
 }
 
@@ -58,11 +53,8 @@ func Login(ctx iris.Context) {
 func Logout(ctx iris.Context) {
 	session := sess.Start(ctx)
 
-	// Revoke users authentication
 	session.Set("authenticated", false)
-	// Or to remove the variable:
 	session.Delete("authenticated")
-	// Or destroy the whole session:
 	session.Destroy()
 
 	ctx.Write(resp.SUCCESS.ToBytes())

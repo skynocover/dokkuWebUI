@@ -1,12 +1,13 @@
 package handler
 
 import (
-	"dokkuwebui/src/resp"
-	"dokkuwebui/src/ssh"
-	"dokkuwebui/src/utils"
 	"fmt"
 
 	"github.com/kataras/iris/v12"
+
+	"dokkuwebui/src/resp"
+	"dokkuwebui/src/ssh"
+	"dokkuwebui/src/utils"
 )
 
 func GitInit(ctx iris.Context) {

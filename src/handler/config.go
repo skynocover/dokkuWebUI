@@ -1,13 +1,14 @@
 package handler
 
 import (
-	"dokkuwebui/src/resp"
-	"dokkuwebui/src/ssh"
-	"dokkuwebui/src/utils"
 	"fmt"
 	"log"
 
 	"github.com/kataras/iris/v12"
+
+	"dokkuwebui/src/resp"
+	"dokkuwebui/src/ssh"
+	"dokkuwebui/src/utils"
 )
 
 type Setting struct {

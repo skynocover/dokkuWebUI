@@ -1,12 +1,13 @@
 package handler
 
 import (
-	"dokkuwebui/src/resp"
-	"dokkuwebui/src/ssh"
 	"fmt"
 	"strconv"
 
 	"github.com/kataras/iris/v12"
+
+	"dokkuwebui/src/resp"
+	"dokkuwebui/src/ssh"
 )
 
 func Logs(ctx iris.Context) {

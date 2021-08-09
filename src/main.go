@@ -10,7 +10,7 @@ import (
 	"github.com/kataras/iris/v12"
 
 	"dokkuwebui/src/handler"
-	"dokkuwebui/src/ssh"
+	"dokkuwebui/src/middleware"
 )
 
 func main() {
@@ -20,30 +20,30 @@ func main() {
 		log.Fatal("Error loading .env file")
 	} else {
 		if len(matches) > 0 {
-			// log.Println("match!")
 			if err := godotenv.Load(); err != nil {
 				log.Fatal("Error loading .env file: ", err)
 			}
 		}
 	}
 
-	if err := ssh.Client.Init(); err != nil {
-		log.Fatal("Error: ", err)
-	}
-
 	app := iris.New()
 
-	log.Println(fmt.Sprintf("Serving at localhost:%s...", os.Getenv("SERVER_LISTEN")))
+	log.Println(fmt.Sprintf("Serving at localhost:%s", os.Getenv("SERVER_LISTEN")))
 
 	app.HandleDir("/", "../public")
 
 	app.Get("/api/version", handler.Version)
 	app.Post("/api/account/login", handler.Login)
 	app.Post("/api/account/logout", handler.Logout)
-	app.Get("/api/redirect", handler.Redirect)
+	// ssh key
+	app.Post("/api/ssh/upload", handler.Upload)
 
-	api := app.Party("/api", handler.CheckExpire)
+	api := app.Party("/api", middleware.CheckPrivateKey, handler.CheckExpire)
 	{
+		// redirect
+		api.Get("/redirect", handler.Redirect)
+
+		// log
 		api.Get("/logs/{appName}/{num}", handler.Logs)
 		// app
 		api.Get("/apps", handler.AppList)
