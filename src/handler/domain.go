@@ -78,7 +78,7 @@ func DomainRemove(ctx iris.Context) {
 
 /////////////////////////////// global ////////////////////////////////
 func DomainGlobal(ctx iris.Context) {
-	r, err := ssh.Client.Run(fmt.Sprintf("dokku domains:report --global"))
+	r, err := ssh.Client.Run("dokku domains:report --global")
 	if err != nil {
 		ctx.Write(resp.SystemError.ToBytesWithErr(err))
 		return

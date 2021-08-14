@@ -84,7 +84,7 @@ func ConfigUnset(ctx iris.Context) {
 ////////////////////////////////// global //////////////////////////////////
 
 func ConfigGlobalShow(ctx iris.Context) {
-	r, err := ssh.Client.Run(fmt.Sprintf("dokku config:show --global "))
+	r, err := ssh.Client.Run("dokku config:show --global ")
 	if err != nil {
 		ctx.Write(resp.SystemError.ToBytesWithErr(err))
 		return

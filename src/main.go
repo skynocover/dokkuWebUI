@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -11,6 +12,7 @@ import (
 
 	"dokkuwebui/src/handler"
 	"dokkuwebui/src/middleware"
+	"dokkuwebui/src/ssh"
 )
 
 func main() {
@@ -22,6 +24,13 @@ func main() {
 		if len(matches) > 0 {
 			if err := godotenv.Load(); err != nil {
 				log.Fatal("Error loading .env file: ", err)
+			}
+			if os.Getenv("ENV") == "development" {
+				dat, err := ioutil.ReadFile("../dokku")
+				if err != nil {
+					log.Fatal("Error read ssh key")
+				}
+				ssh.Client.Init(dat)
 			}
 		}
 	}
@@ -37,6 +46,22 @@ func main() {
 	app.Post("/api/account/logout", handler.Logout)
 	// ssh key
 	app.Post("/api/ssh/upload", handler.Upload)
+
+	// database
+	app.Get("/api/databases", handler.Databases)
+	app.Post("/api/database/{database}", handler.DatabaseInstall)
+	app.Patch("/api/database/{database}/{enable}", handler.DatabaseEnable)
+	app.Delete("/api/database/{database}", handler.DatabaseUninstall)
+
+	// database service
+	app.Get("/api/dbservice/{database}", handler.DBServices)
+	app.Get("/api/dbservice/{database}/{service}", handler.DBServiceInfo)
+	app.Post("/api/dbservice/{database}", handler.DBServiceAdd)
+	// app.Delete("/api/dbservice/{database}/{service}", handler.DBServiceDestroy)
+	app.Patch("/api/dbservice", handler.DBStart)
+
+	app.Get("/api/dblinks/{database}/{service}", handler.DBLinks)
+	app.Post("/api/dblink", handler.DBLink)
 
 	api := app.Party("/api", middleware.CheckPrivateKey, handler.CheckExpire)
 	{

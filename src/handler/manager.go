@@ -23,14 +23,13 @@ func Logs(ctx iris.Context) {
 		ctx.Write(resp.SystemError.ToBytesWithErr(err))
 		return
 	}
-	// report := utils.Parse(r)
 	ctx.Write(resp.SUCCESS.ToBytesWithObject(iris.Map{"report": report}))
 }
 
 func LogsErr(ctx iris.Context) {
 	appName := ctx.FormValue("appName")
 	if appName == "" {
-		report, err := ssh.Client.Run(fmt.Sprintf("dokku logs:failed --all"))
+		report, err := ssh.Client.Run("dokku logs:failed --all")
 		if err != nil {
 			ctx.Write(resp.SystemError.ToBytesWithErr(err))
 			return

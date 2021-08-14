@@ -25,3 +25,17 @@ func Parse(s string) (infos []Info) {
 	}
 	return
 }
+
+func ParseNewLine(s string) (r []string) {
+	ss := strings.Split(s, "\n")
+	for i := range ss {
+		if i == 0 {
+			continue
+		}
+		if ss[i] == "" {
+			continue
+		}
+		r = append(r, ss[i])
+	}
+	return
+}

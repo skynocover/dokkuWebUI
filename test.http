@@ -1,4 +1,5 @@
-@url=http://dokkuweb.credot.ml
+# @url=http://dokkuweb.credot.ml
+@url=http://localhost:8081
 @appName=amber2
 
 #####
@@ -114,3 +115,67 @@ DELETE  {{url}}/api/config/{{appName}}
 
 #########
 GET  {{url}}/api/globalconfig
+#######
+
+########   Database
+
+########
+GET {{url}}/api/databases
+
+#########
+POST {{url}}/api/database/postgres
+
+########
+PATCH {{url}}/api/database/postgres/enable
+
+#####3
+PATCH {{url}}/api/database/postgres/disable
+
+########
+DELETE  {{url}}/api/database/postgres
+
+#######
+
+########   Database Service
+
+#######
+GET {{url}}/api/dbservice/postgres
+
+######
+GET {{url}}/api/dbservice/postgres/test2
+
+#####
+POST {{url}}/api/dbservice/postgres
+Content-Type: application/json
+
+{
+    "service":"test2",
+    "password":"123456",
+    "rootPassword":"1qaz#EDC5tgb"
+}
+
+######
+PATCH {{url}}/api/dbservice
+Content-Type: application/json
+
+{
+    "database":"postgres",
+    "service":"test2",
+    "start":"stop"
+}
+
+######
+GET {{url}}/api/dblinks/postgres/test
+
+######
+POST {{url}}/api/dblink
+Content-Type: application/json
+
+{
+    "database":"postgres",
+    "service":"test2",
+    "appName":"adminer",
+    "link":false
+}
+
+## dokku-postgres-test2
