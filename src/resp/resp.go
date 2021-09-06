@@ -129,3 +129,9 @@ var ErrorSSHKeyAlreadyExist = Error{
 	ErrorCode:    1005,
 	ErrorMessage: "SSH key already exists",
 }
+
+///////// system fail
+var ErrorCloudFlareFail = Error{
+	ErrorCode:    1006,
+	ErrorMessage: "Cloud flare fail",
+}

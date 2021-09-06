@@ -179,3 +179,9 @@ Content-Type: application/json
 }
 
 ## dokku-postgres-test2
+####
+POST https://api.cloudflare.com/client/v4/zones/2df42beb73d51f4d041a063e23eb96c9/dns_records
+Authorization:Bearer TeFsU6Y1sbK22PrnkqhoU3sUsAAYn-Pt8I-FrzP9
+Content-Type:application/json
+
+{"type":"A","name":"admintest","content":"34.81.157.108","ttl":1,"proxied":true}
